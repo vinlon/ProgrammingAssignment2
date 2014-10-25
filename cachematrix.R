@@ -44,7 +44,8 @@ cacheSolve <- function(x, ...) {
                 inverse
         }
         else{
-                inverse<-solve(x$get())
+                ## assume that the matrix supplied is always invertible.
+                inverse<-solve(x$get(),...)
                 x$setinverse(inverse)
                 inverse
         }
