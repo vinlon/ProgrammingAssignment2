@@ -10,8 +10,11 @@ makeCacheMatrix <- function(x = matrix()) {
                 if(!is.matrix(y)){
                         stop("Only matrix parameter is accepted")
                 }
-                x<<-y
-                cache<-NULL
+                ##if y is same as x, don't reset the cahce. 
+                if(!identical(x,y)){
+                        x<<-y
+                        cache<<-NULL                        
+                }
         }
         get<-function() x
         setinverse<-function(inverse){
@@ -36,6 +39,9 @@ cacheSolve <- function(x, ...) {
                 if(is.matrix(x)){
                      warning("Parameter is a matrix,the inverse of this matrix cannot be cached")   
                      x<-makeCacheMatrix(x)
+                }
+                else{
+                        stop("Invalid CacheMatrix")
                 }
         }
         inverse<-x$getinverse()
